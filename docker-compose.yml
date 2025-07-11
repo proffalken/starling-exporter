@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  starling-exporter:
+    # Use the image from GitHub Container Registry
+    image: ghcr.io/proffalken/starling-exporter:latest
+    # Uncomment to build locally instead
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    environment:
+      STARLING_API_TOKEN: "${STARLING_API_TOKEN}"
+      POLL_PERIOD_SECONDS: "${POLL_PERIOD_SECONDS:-30}"
+      EXPORTER_PORT: "${EXPORTER_PORT:-8000}"
+    ports:
+      - "8126:8000"
+    restart: unless-stopped
